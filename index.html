@@ -3,7 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hello Bulma!</title>
+  <title>ぶたのひづめ</title>
+  <script>
+    (function (d) {
+      var config = {
+        kitId: 'lxr2opn',
+        scriptTimeout: 3000,
+        async: true
+      },
+        h = d.documentElement, t = setTimeout(function () { h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive"; }, config.scriptTimeout), tk = d.createElement("script"), f = false, s = d.getElementsByTagName("script")[0], a; h.className += " wf-loading"; tk.src = 'https://use.typekit.net/' + config.kitId + '.js'; tk.async = true; tk.onload = tk.onreadystatechange = function () { a = this.readyState; if (f || a && a != "complete" && a != "loaded") return; f = true; clearTimeout(t); try { Typekit.load(config) } catch (e) { } }; s.parentNode.insertBefore(tk, s)
+    })(document);
+  </script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
   <link rel="stylesheet" href="css/main.css" />
 </head>
@@ -38,7 +48,7 @@
       <div class="container is-max-desktop">
         <div class="tab-contents">
           <div class="tab-content" v-bind:class="{ 'is-active': isActive == 'profile' }">
-            <p class="title">自己紹介</p>
+            <p class="tab title">自己紹介</p>
             <hr />
             <div class="columns">
               <div class="column">
@@ -48,7 +58,7 @@
               </div>
               <div class="column">
                 <div class="block">
-                  <p class="is-size-2">Ishijima Nanaka</p>
+                  <p class="is-size-2">Ishijima Nanaka / キノ子</p>
                   <a href="https://twitter.com/nanaka0012" target="_blank"><i class="fab fa-twitter fa-3x"></i></a>
                   <a href="https://github.com/nanaka0012" target="_blank"><i class="fab fa-github fa-3x"></i></a>
                 </div>
@@ -64,6 +74,7 @@
                   <div class="content">
                     <ul>
                       <li>筑波大学 知識情報・図書館学類 知識情報システム主専攻</li>
+                      <li>筑波大学 高久研究室</li>
                       <li>筑波大学 AmusementCreators</li>
                       <li>Has-key Inc. エンジニア(インターン)</li>
                     </ul>
@@ -73,6 +84,7 @@
                 <div class="block">
                   <p class="is-size-4">興味があること</p>
                   <div class="content">
+                    <p>かみんぐすーん</p>
                   </div>
 
                 </div>
@@ -82,46 +94,26 @@
           </div>
 
           <div class="tab-content" v-bind:class="{ 'is-active': isActive == 'Works' }">
-            <p class="title">Works</p>
-            <div class="columns">
-              <div class="column">
+            <p class="tab title">Works</p>
+            <hr />
+            <div class="columns is-multiline">
+              <div class="column is-half" v-for="(work,i) in works" :key="'w-'+i">
                 <div class="card">
-                  <div class="card-title">
-                    <p class="title">title</p>
+                  <div class="card-title m-5">
+                    <p class="title">{{ work.title }}</p>
                   </div>
                   <div class="card-image">
-                    <figure class="image is-4by3">
-                      <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image" />
+                    <figure class="image is-16by9">
+                      <img :src="work.image" alt="Placeholder image" />
                     </figure>
                   </div>
                   <div class="card-content">
                     <div class="content">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                      <a href="#">#css</a> <a href="#">#responsive</a>
-                      <br />
-                      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="column">
-                <div class="card">
-                  <div class="card-title">
-                    <p class="title">title</p>
-                  </div>
-                  <div class="card-image">
-                    <figure class="image is-4by3">
-                      <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image" />
-                    </figure>
-                  </div>
-                  <div class="card-content">
-                    <div class="content">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                      <a href="#">#css</a> <a href="#">#responsive</a>
-                      <br />
-                      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                      <p v-html="work.description"></p>
+                      <p class="tags">
+                        <span class="tag is-primary is-rounded" v-for="(tag,i) in work.tags"
+                          :key="'tag-'+i">{{tag}}</span>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -130,57 +122,37 @@
           </div>
 
           <div class="tab-content" v-bind:class="{ 'is-active': isActive == 'games' }">
-            <p class="title">Games</p>
-            <div class="columns">
-              <div class="column">
+            <p class="tab title">Games</p>
+            <hr />
+            <div class="columns is-multiline">
+              <div class="column is-half" v-for="(game,i) in games" :key="'g-'+i">
                 <div class="card">
                   <div class="card-title m-5">
-                    <p class="title">たこシューティング</p>
+                    <p class="title">{{ game.title }}</p>
                   </div>
-                  <div class="card-image m-5">
-                    <figure class="image is-4by3">
-                      <img src="img/tako.png" alt="Placeholder image" />
+                  <div class="card-image">
+                    <figure class="image is-16by9">
+                      <img :src="game.image" alt="Placeholder image" />
                     </figure>
                   </div>
                   <div class="card-content">
                     <div class="content">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                      <a href="#">#css</a> <a href="#">#responsive</a>
-                      <br />
-                      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="column">
-                <div class="card">
-                  <div class="card-title m-5">
-                    <p class="title">ちみちみざむらい</p>
-                  </div>
-                  <div class="card-image m-5">
-                    <figure class="image is-4by3">
-                      <img src="img/ex2019.png" alt="Placeholder image" />
-                    </figure>
-                  </div>
-                  <div class="card-content">
-                    <div class="content">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                      <a href="#">#css</a> <a href="#">#responsive</a>
-                      <br />
-                      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                      <p v-html="game.description"></p>
+                      <p class="tags">
+                        <span class="tag is-primary is-rounded" v-for="(tag,i) in game.tags"
+                          :key="'tag-'+i">{{tag}}</span>
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
   </div>
+
   <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
