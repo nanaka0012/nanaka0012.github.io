@@ -22,8 +22,8 @@
   <div id="app">
     <section class="hero is-primary">
       <div class="hero-body">
-        <p class="title">ぶたのひづめ</p>
-        <p class="subtitle">Webアプリとかゲームとか作ったものいろいろ</p>
+        <p class="title is-1">ぶたのひづめ</p>
+        <p class="subtitle is-6">Webアプリとかゲームとか作ったものいろいろ</p>
       </div>
 
       <div class="hero-foot">
@@ -94,7 +94,7 @@
           </div>
 
           <div class="tab-content" v-bind:class="{ 'is-active': isActive == 'Works' }">
-            <p class="tab title">Works</p>
+            <p class="tab title">作ったアプリとか</p>
             <hr />
             <div class="columns is-multiline">
               <div class="column is-half" v-for="(work,i) in works" :key="'w-'+i">
@@ -122,7 +122,7 @@
           </div>
 
           <div class="tab-content" v-bind:class="{ 'is-active': isActive == 'games' }">
-            <p class="tab title">Games</p>
+            <p class="tab title">作ったゲームとか</p>
             <hr />
             <div class="columns is-multiline">
               <div class="column is-half" v-for="(game,i) in games" :key="'g-'+i">

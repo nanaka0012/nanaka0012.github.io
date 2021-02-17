@@ -11,6 +11,14 @@ var app = new Vue({
         image: "img/hobeeeeee.png",
         link: "https://hobeeeeee.netlify.app/",
       },
+      {
+        title: "なっとうまき",
+        year: "2020/6",
+        description: "リレー小説に分岐を作ることで、Ifが書けるリレー小説投稿サイト。",
+        tags: ["Ruby on Rails", "SQLite", "Docker"],
+        image: "img/nattomaki.png",
+        link: null,
+      },
     ],
     games: [
       {
