@@ -1,0 +1,161 @@
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ぶたのひづめ</title>
+  <script>
+    (function (d) {
+      var config = {
+        kitId: 'lxr2opn',
+        scriptTimeout: 3000,
+        async: true
+      },
+        h = d.documentElement, t = setTimeout(function () { h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive"; }, config.scriptTimeout), tk = d.createElement("script"), f = false, s = d.getElementsByTagName("script")[0], a; h.className += " wf-loading"; tk.src = 'https://use.typekit.net/' + config.kitId + '.js'; tk.async = true; tk.onload = tk.onreadystatechange = function () { a = this.readyState; if (f || a && a != "complete" && a != "loaded") return; f = true; clearTimeout(t); try { Typekit.load(config) } catch (e) { } }; s.parentNode.insertBefore(tk, s)
+    })(document);
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+  <div id="app">
+    <section class="hero is-primary">
+      <div class="hero-body">
+        <p class="title is-1">ぶたのひづめ</p>
+        <p class="subtitle is-6">Webアプリとかゲームとか作ったものいろいろ</p>
+      </div>
+
+      <div class="hero-foot">
+        <nav class="tabs is-boxed is-fullwidth">
+          <div class="container">
+            <ul>
+              <li v-bind:class="{ 'is-active': isActive == 'profile' }">
+                <a v-on:click="isActive = 'profile'">Profile</a>
+              </li>
+              <li v-bind:class="{ 'is-active': isActive == 'Works' }">
+                <a v-on:click="isActive = 'Works'">Works</a>
+              </li>
+              <li v-bind:class="{ 'is-active': isActive == 'games' }">
+                <a v-on:click="isActive = 'games'">Games</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="tab-contents">
+          <div class="tab-content" v-bind:class="{ 'is-active': isActive == 'profile' }">
+            <p class="tab title">自己紹介</p>
+            <hr />
+            <div class="columns">
+              <div class="column">
+                <figure class="image">
+                  <img src="img/profile.jpg">
+                </figure>
+              </div>
+              <div class="column">
+                <div class="block">
+                  <p class="is-size-2">Ishijima Nanaka / キノ子</p>
+                  <a href="https://twitter.com/nanaka0012" target="_blank"><i class="fab fa-twitter fa-3x"></i></a>
+                  <a href="https://github.com/nanaka0012" target="_blank"><i class="fab fa-github fa-3x"></i></a>
+                </div>
+
+                <div class="block">
+                  <div class="content">
+                    <p>ゲームを作るぶた</p>
+                  </div>
+                </div>
+
+                <div class="block">
+                  <p class="is-size-4">所属</p>
+                  <div class="content">
+                    <ul>
+                      <li>筑波大学 知識情報・図書館学類 知識情報システム主専攻</li>
+                      <li>筑波大学 高久研究室</li>
+                      <li>筑波大学 AmusementCreators</li>
+                      <li>Has-key Inc. エンジニア(インターン)</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="block">
+                  <p class="is-size-4">興味があること</p>
+                  <div class="content">
+                    <p>かみんぐすーん</p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="tab-content" v-bind:class="{ 'is-active': isActive == 'Works' }">
+            <p class="tab title">作ったアプリとか</p>
+            <hr />
+            <div class="columns is-multiline">
+              <div class="column is-half" v-for="(work,i) in works" :key="'w-'+i">
+                <div class="card">
+                  <div class="card-title m-5">
+                    <p class="title">{{ work.title }}</p>
+                  </div>
+                  <div class="card-image">
+                    <figure class="image is-16by9">
+                      <img :src="work.image" alt="Placeholder image" />
+                    </figure>
+                  </div>
+                  <div class="card-content">
+                    <div class="content">
+                      <p v-html="work.description"></p>
+                      <p class="tags">
+                        <span class="tag is-primary is-rounded" v-for="(tag,i) in work.tags"
+                          :key="'tag-'+i">{{tag}}</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" v-bind:class="{ 'is-active': isActive == 'games' }">
+            <p class="tab title">作ったゲームとか</p>
+            <hr />
+            <div class="columns is-multiline">
+              <div class="column is-half" v-for="(game,i) in games" :key="'g-'+i">
+                <div class="card">
+                  <div class="card-title m-5">
+                    <p class="title">{{ game.title }}</p>
+                  </div>
+                  <div class="card-image">
+                    <figure class="image is-16by9">
+                      <img :src="game.image" alt="Placeholder image" />
+                    </figure>
+                  </div>
+                  <div class="card-content">
+                    <div class="content">
+                      <p v-html="game.description"></p>
+                      <p class="tags">
+                        <span class="tag is-primary is-rounded" v-for="(tag,i) in game.tags"
+                          :key="'tag-'+i">{{tag}}</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+</body>
+
+</html>
